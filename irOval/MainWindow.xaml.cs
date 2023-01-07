@@ -11,24 +11,36 @@ namespace irOval
     {
         TextBlock throttleTextBlock;
 
-        private Label runningLabel;
+        Label runningLabel;
 
-        iRacingConnection irc;
+        Button startButton;
+
+        iRacingEvents irc;
 
         bool showIracingData = false;
 
 
         void SetupIracingSdk()
         {
-            irc = new iRacingConnection();
-            irc.NewSessionData += IracingNewData;
+            irc = new iRacingEvents();
+            irc.Connected += Irc_Connected;
+            irc.Disconnected += Irc_Disconnected;
+            irc.NewData += IracingNewData;
+        }
+
+        private void Irc_Disconnected()
+        {
+            startButton.Content = "Connect";
+        }
+
+        private void Irc_Connected()
+        {
+            startButton.Content = "Disconnect";
         }
 
         private void IracingNewData(DataSample data)
         {
-            if (!showIracingData) return;
-
-            throttleTextBlock.Text = $"Throttle: {data.Telemetry.Throttle}%";
+            throttleTextBlock.Text = $"Throttle: {data.Telemetry.Throttle * 100}%";
 
         }
 
@@ -37,6 +49,8 @@ namespace irOval
             throttleTextBlock = (TextBlock)FindName("ThrottleTextBlock");
 
             runningLabel = (Label)FindName("RunningLabel");
+
+            startButton = (Button)FindName("StartButton");
 
         }
 
@@ -54,13 +68,16 @@ namespace irOval
 
         private void StartButtonMouseClick(object sender, RoutedEventArgs e)
         {
+
             showIracingData = !showIracingData;
             if (showIracingData)
             {
+                irc.StartListening();
                 runningLabel.Content = "Running";
             }
             else
             {
+                irc.StopListening();
                 runningLabel.Content = "Not running";
             }
         }
