@@ -1,0 +1,30 @@
+﻿<Window x:Class="irOval.Settings.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:irOval.Settings"
+        mc:Ignorable="d"
+        Title="Settings" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight">
+    <Grid Width="800" Height="450">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="652*"/>
+            <ColumnDefinition Width="119*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Center" Margin="0,420,0,0" VerticalAlignment="Top" Click="StartButton_Click" Width="98" Grid.Column="2" Height="20"/>
+        <CheckBox x:Name="CheckBoxX" Tag="X" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <CheckBox x:Name="CheckBoxY" Tag="Y" Grid.Column="1" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <CheckBox x:Name="CheckBoxZ" Tag="Z" Grid.Column="1" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <Slider x:Name="SliderXLaps" IsEnabled="{Binding ElementName=CheckBoxX, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1" Tag="X" Grid.Column="1" HorizontalAlignment="Left" Margin="35,10,0,0" Value="3" VerticalAlignment="Top" Width="120" Minimum="2" Maximum="10" SmallChange="1" ValueChanged="SliderLaps_ValueChanged"/>
+        <Slider x:Name="SliderYLaps" IsEnabled="{Binding ElementName=CheckBoxY, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1" Tag="Y" Grid.Column="1" HorizontalAlignment="Left" Margin="35,58,0,0" Value="5" VerticalAlignment="Top" Width="120" Minimum="3" Maximum="50" SmallChange="1" ValueChanged="SliderLaps_ValueChanged"/>
+        <Slider x:Name="SliderZLaps" IsEnabled="{Binding ElementName=CheckBoxZ, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1" Tag="Z" Grid.Column="1" HorizontalAlignment="Left" Margin="35,101,0,0" Value="10" VerticalAlignment="Top" Width="120" Minimum="5" Maximum="50" SmallChange="1" ValueChanged="SliderLaps_ValueChanged"/>
+        <TextBox x:Name="textBoxX" IsReadOnly="True" IsEnabled="{Binding ElementName=CheckBoxX, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Margin="160,13,0,0" TextWrapping="Wrap" Text="{Binding ElementName=SliderXLaps, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30"/>
+        <TextBox x:Name="textBoxY" IsReadOnly="True" IsEnabled="{Binding ElementName=CheckBoxY, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Margin="160,61,0,0" TextWrapping="Wrap" Text="{Binding ElementName=SliderYLaps, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30"/>
+        <TextBox x:Name="textBoxZ" IsReadOnly="True" IsEnabled="{Binding ElementName=CheckBoxZ, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Margin="160,104,0,0" TextWrapping="Wrap" Text="{Binding ElementName=SliderZLaps, Path=Value, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="30"/>
+        <TextBlock x:Name="textBlockX" IsEnabled="{Binding ElementName=CheckBoxX, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Margin="195,15,0,0" TextWrapping="Wrap" Text="Last X Laps Avg" VerticalAlignment="Top" Width="109"/>
+        <TextBlock x:Name="textBlockY" IsEnabled="{Binding ElementName=CheckBoxY, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Margin="195,62,0,0" TextWrapping="Wrap" Text="Last Y Laps Avg" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockZ" IsEnabled="{Binding ElementName=CheckBoxZ, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Left" Margin="195,104,0,0" TextWrapping="Wrap" Text="Last Z Laps Avg" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

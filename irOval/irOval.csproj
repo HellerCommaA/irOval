@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Resource Include="Images\Splash.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="iRacingSDK" Version="1.0.1.23" />
